@@ -16,7 +16,6 @@
       - [实战题目解析](#实战题目解析-1)
     - [作业](#作业)
 
-
 ## 预习第一课
 
 ### 数据结构与算法总览
@@ -36,7 +35,7 @@
     1. 5 分钟：读题 + 思考（最多不要超过 15 分钟）
     2. 直接看解决：注意！多解法，比较解法优劣（如何 15 分钟后依旧没思路的情况下）
     3. **背诵、默写好的解法**（这一步很重要）
-2. 刷题第二遍        
+2. 刷题第二遍
     1. 将每种解法写一遍（闭卷），反复 Debug，直到代码在 [LeetCode](https://leetcode-cn.com/) 上执行通过
     2. 对多种解法之间的优劣进行体会、优化
     3. 总结及反思自己写的时候遇到的一些问题
@@ -57,15 +56,15 @@
 
 - Big-O Complexity Chart
 
-![](./Big-O%20Complexity%20Chart.png)
+![Big-O Complexity Chart](./Big-O%20Complexity%20Chart.png)
 
 - Common Data Structure Operations
 
-![](./Common%20Data%20Structure%20Operations.png)
+![Common Data Structure Operations](./Common%20Data%20Structure%20Operations.png)
 
 - Array Sorting Algorithms
 
-![](./Array%20Sorting%20Algorithms.png)
+![Array Sorting Algorithms](./Array%20Sorting%20Algorithms.png)
 
 ## 第一周
 
@@ -109,7 +108,7 @@
 
 #### 常见问题解决办法
 
-**解决各种问题的关键是找最近重复子问题**
+> 解决各种问题的关键是找最近重复子问题
 
 1. 遇到问题不会解，懵逼的情况下怎么解决
     1. 思考能不能暴力解决
