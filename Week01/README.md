@@ -55,11 +55,14 @@
 
 #### [Know Thy Complexities!](https://www.bigocheatsheet.com/)
 
-- 时间复杂度图表
+- Big-O Complexity Chart
 ![](./Big-O%20Complexity%20Chart.png)
 
-- 复杂度分析表
+- Common Data Structure Operations
 ![](./Common%20Data%20Structure%20Operations.png)
+
+- Array Sorting Algorithms
+![](./Array%20Sorting%20Algorithms.png)
 
 ## 第一周
 
