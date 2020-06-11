@@ -73,8 +73,24 @@
 
 #### 数组、链表、跳表的基本实现和特性
 
-- 跳表的实现原理是链表升维实现的，跳表必须是有序的
-待补充....
+- 数组（Array）：
+  - 访问任何一个元素的时间复杂度 O(1)
+  - 插入、修改、删除的时间复杂度 O(n)
+- 链表（Linked List）
+  - 查找（lookup），时间复杂度 O(n)
+  - prepend（头/尾节点增加）、append、insert、delete 时间复杂度 O(1)
+- 跳表(Skip List)  
+  - 插入、删除、搜索时间复杂度 O(logn)
+  - 跳表的实现原理是 升维思想 + 空间换时间
+  - 跳表里面的元素必须是有序的，跳表对标的是平衡树也就是二叉搜索数中和二分查找
+  - 跳表的最大优势是原理简单、容易实现、方便扩展、效率更高。因此在一些热门的项目里用来替代平衡树，如 Redis、LevelDB 等，缺点：维护成本较高
+- 参考链接
+  - [Java 源码分析（ArrayList）](http://developer.classpath.org/doc/java/util/ArrayList-source.html)
+  - [Linked List 的标准实现代码](http://www.geeksforgeeks.org/implementing-a-linked-list-in-java-using-class/)
+  - [Linked List 示例代码](http://www.cs.cmu.edu/~adamchik/15-121/lectures/Linked%20Lists/code/LinkedList.java)
+  - [Java 源码分析（LinkedList）](http://developer.classpath.org/doc/java/util/LinkedList-source.html)
+  - LRU Cache - Linked list - [LRU 缓存机制](http://leetcode-cn.com/problems/lru-cache)
+  - Redis - Skip List：[跳跃表、为啥 Redis 使用跳表（Skip List）而不是使用 Red-Black？](http://www.zhihu.com/question/20202931)
 
 #### 实战题目解析
 
