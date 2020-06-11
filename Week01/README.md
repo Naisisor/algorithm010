@@ -1,0 +1,163 @@
+[TOC]
+
+## 预习第一课
+
+### 数据结构与算法总览
+
+#### 切题四件套
+
+- Clarification
+- Possible solutions
+    - compare (time/space)
+    - optimal（加强）
+- Coding（多写）
+- Test cases
+
+#### 五毒练习法
+
+1. 刷题第一遍
+    1. 5 分钟：读题 + 思考（最多不要超过 15 分钟）
+    2. 直接看解决：注意！多解法，比较解法优劣（如何 15 分钟后依旧没思路的情况下）
+    3. **背诵、默写好的解法**（这一步很重要）
+2. 刷题第二遍        
+    1. 将每种解法写一遍（闭卷），反复 Debug，直到代码在 [LeetCode](https://leetcode-cn.com/) 上执行通过
+    2. 对多种解法之间的优劣进行体会、优化
+    3. 总结及反思自己写的时候遇到的一些问题
+3. 刷题第三遍
+    1. 时隔一天后，再重复做题
+    2. 对于不同解法的熟练程度进行专项练习
+4. 刷题第四遍：时隔一周后，反复回来练习相同的题目
+5. 刷题第五遍：面试前一周进行恢复性训练
+
+#### 刷题核心思想和误区
+
+- 思想
+    1. 重复刷题至少刷 5 遍
+    2. 优化方法：空间换时间、升维（二维）
+- 误区：做题只做一遍
+
+#### [Know Thy Complexities!](https://www.bigocheatsheet.com/)
+
+- 时间复杂度图表
+![](./Big-O%20Complexity%20Chart.png)
+
+- 复杂度分析表
+![](./Common%20Data%20Structure%20Operations.png)
+
+## 第一周
+
+### 第三课 | 数组、链表、跳表
+
+#### 数组、链表、跳表的基本实现和特性
+
+- 跳表的实现原理是链表升维实现的，跳表必须是有序的
+待补充....
+
+#### 实战题目解析
+
+- Array 实战题目
+    1. [两数之和](https://leetcode-cn.com/problems/two-sum/)
+    2. [移动零](https://leetcode-cn.com/problems/move-zeroes/)
+    3. [盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/) 使用 「左右夹逼」双指针的方法解决
+    4. [爬楼梯](https://leetcode.com/problems/climbing-stairs/)
+    5. [三数之和](https://leetcode-cn.com/problems/3sum/)
+- Linked List 实战题目
+    1. [反转链表](https://leetcode.com/problems/reverse-linked-list/)
+    2. [两两交换链表中的节点](https://leetcode.com/problems/swap-nodes-in-pairs)
+    3. [环形链表](https://leetcode.com/problems/linked-list-cycle)
+    4. [环形链表 II](https://leetcode.com/problems/linked-list-cycle-ii)
+    5. [K 个一组翻转链表](https://leetcode.com/problems/reverse-nodes-in-k-group/)
+
+#### 常见问题解决办法
+**解决各种问题的关键是找最近重复子问题**
+1. 遇到问题不会解，懵逼的情况下怎么解决
+    1. 思考能不能暴力解决
+    2. 最基本的情况应该怎么解决
+
+### 第四课 | 栈、队列、优先队列、双端队列
+
+- Stack（栈）：
+    - 特征：后进先出（LIFO），添加、删除皆为 O(1)，查询 O(n)
+    - 查询资料关键字，比如 Java 资料，搜索关键字为 stack java 10
+- Queue（队列）：
+    - 特征：先入先出（FIFO），添加、删除皆为 O(1)，查询 O(n)
+    - 查询资料关键字：queue python 3
+- Deque（Double-End Queue，双端队列）
+    - 简单理解：双端可以进出的 Queue，Double-End Queue（Stack 和 Queue 的结合）
+    - 插入和删除都是 O(1) 操作，查询 O(n)
+- Priority Queue（优先队列）
+    - 插入： O(1)
+    - 取出操作：O(logN) - 按照元素的优先级取出。好处：取出操作不再是先入先出的，而是按照优先级
+    - 底层具体实现的数据源结构较为多样和复杂：heap（堆）、bst、treap
+        - heap 也是多种实现的，可能是所谓的二叉树实现的堆，也可能是 Fibonacci 堆或者其它形式的堆
+
+- 什么样题目可以用 Stack 来解决？
+    - 具有最近相关性的事物，适合用 Stack 方法解决，如 [有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+
+#### 实战题目解析
+
+- [有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+- [最小栈](https://leetcode-cn.com/problems/min-stack/)
+- [柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram)
+- [滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum)
+
+### 作业
+
+1. 用 add first 或 add last 这套新的 API 改写 Deque 的代码
+2. 分析 Queue 和 Priority Queue 的源码
+3. [删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/) 
+    
+    ```python
+    class Solution:
+        def removeDuplicates(self, nums: List[int]) -> int:
+            # 时间复杂度 O(n)
+            # 第一种解法
+            i = 1
+            n = len(nums)
+            while i < n:
+                if nums[i] == [i - 1]:
+                    nums.pop(i)
+                    n += 1
+                else:
+                    i += 1
+            return nums
+            # 第二种解法
+            if len(nums) == 0:
+                return 0
+            i = 0
+            for n in mums:
+                if nums[i] == n:
+                    continue
+                i += 1
+                nums[i] = n
+            return nums
+    ```
+
+4. [旋转数组](https://leetcode-cn.com/problems/rotate-array/submissions/)
+    
+    ```python
+    class Solution:
+        def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        # 第一种方法
+        while k != 0:
+            nums.insert(0, nums.pop())
+            k -= 1
+        return nums
+        # 第二种方法
+        for _ in range(k):
+            nums.insert(0, nums.pop())
+        return nums
+        # 第三种方法
+        k = k % len(nums)
+        nums[:] = nums[-k:] + nums[:-k]
+        return nums
+    ```
+
+5. [合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+    
+    ```python
+    ```
+    
