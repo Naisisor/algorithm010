@@ -25,8 +25,8 @@
 
 - Clarification
 - Possible solutions
-    - compare (time/space)
-    - optimal（加强）
+  - compare (time/space)
+  - optimal（加强）
 - Coding（多写）
 - Test cases
 
@@ -108,7 +108,9 @@
     5. [K 个一组翻转链表](https://leetcode.com/problems/reverse-nodes-in-k-group/)
 
 #### 常见问题解决办法
+
 **解决各种问题的关键是找最近重复子问题**
+
 1. 遇到问题不会解，懵逼的情况下怎么解决
     1. 思考能不能暴力解决
     2. 最基本的情况应该怎么解决
@@ -116,22 +118,22 @@
 ### 第四课 | 栈、队列、优先队列、双端队列
 
 - Stack（栈）：
-    - 特征：后进先出（LIFO），添加、删除皆为 O(1)，查询 O(n)
-    - 查询资料关键字，比如 Java 资料，搜索关键字为 stack java 10
+  - 特征：后进先出（LIFO），添加、删除皆为 O(1)，查询 O(n)
+  - 查询资料关键字，比如 Java 资料，搜索关键字为 stack java 10
 - Queue（队列）：
-    - 特征：先入先出（FIFO），添加、删除皆为 O(1)，查询 O(n)
-    - 查询资料关键字：queue python 3
+  - 特征：先入先出（FIFO），添加、删除皆为 O(1)，查询 O(n)
+  - 查询资料关键字：queue python 3
 - Deque（Double-End Queue，双端队列）
-    - 简单理解：双端可以进出的 Queue，Double-End Queue（Stack 和 Queue 的结合）
-    - 插入和删除都是 O(1) 操作，查询 O(n)
+  - 简单理解：双端可以进出的 Queue，Double-End Queue（Stack 和 Queue 的结合）
+  - 插入和删除都是 O(1) 操作，查询 O(n)
 - Priority Queue（优先队列）
-    - 插入： O(1)
-    - 取出操作：O(logN) - 按照元素的优先级取出。好处：取出操作不再是先入先出的，而是按照优先级
+  - 插入： O(1)
+  - 取出操作：O(logN) - 按照元素的优先级取出。好处：取出操作不再是先入先出的，而是按照优先级
     - 底层具体实现的数据源结构较为多样和复杂：heap（堆）、bst、treap
-        - heap 也是多种实现的，可能是所谓的二叉树实现的堆，也可能是 Fibonacci 堆或者其它形式的堆
+      - heap 也是多种实现的，可能是所谓的二叉树实现的堆，也可能是 Fibonacci 堆或者其它形式的堆
 
 - 什么样题目可以用 Stack 来解决？
-    - 具有最近相关性的事物，适合用 Stack 方法解决，如 [有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+  - 具有最近相关性的事物，适合用 Stack 方法解决，如 [有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
 
 #### 实战题目解析
 
@@ -144,8 +146,8 @@
 
 1. 用 add first 或 add last 这套新的 API 改写 Deque 的代码
 2. 分析 Queue 和 Priority Queue 的源码
-3. [删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/) 
-    
+3. [删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
+
     ```python
     class Solution:
         def removeDuplicates(self, nums: List[int]) -> int:
@@ -173,7 +175,7 @@
     ```
 
 4. [旋转数组](https://leetcode-cn.com/problems/rotate-array/submissions/)
-    
+
     ```python
     class Solution:
         def rotate(self, nums: List[int], k: int) -> None:
@@ -196,7 +198,6 @@
     ```
 
 5. [合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
-    
+
     ```python
     ```
-    
