@@ -56,12 +56,15 @@
 #### [Know Thy Complexities!](https://www.bigocheatsheet.com/)
 
 - Big-O Complexity Chart
+
 ![](./Big-O%20Complexity%20Chart.png)
 
 - Common Data Structure Operations
+
 ![](./Common%20Data%20Structure%20Operations.png)
 
 - Array Sorting Algorithms
+
 ![](./Array%20Sorting%20Algorithms.png)
 
 ## 第一周
