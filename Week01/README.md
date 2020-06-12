@@ -28,7 +28,7 @@
 ### LeetCode
 
 - LeetCode 官网：[https://leetcode.com/](https://leetcode.com/)
-- LeetCode 中文社区：[https://leetcode.com/](https://leetcode.com/)
+- LeetCode 中文社区：[https://leetcode-cn.com/](https://leetcode-cn.com/)
 
 ### 数据结构与算法总览
 
@@ -229,7 +229,7 @@
     class Solution:
         def removeDuplicates(self, nums: List[int]) -> int:
             # 时间复杂度 O(n)
-            # 第一种解法
+            # 方法一
             i = 1
             n = len(nums)
             while i < n:
@@ -239,7 +239,7 @@
                 else:
                     i += 1
             return nums
-            # 第二种解法
+            # 方法二
             if len(nums) == 0:
                 return 0
             i = 0
@@ -259,18 +259,18 @@
         """
         Do not return anything, modify nums in-place instead.
         """
-        # 第一种方法
+        # 方法一
         k = k % len(nums)
         while k != 0:
             nums.insert(0, nums.pop())
             k -= 1
         return nums
-        # 第二种方法
+        # 方法二
         k = k % len(nums)
         for _ in range(k):
             nums.insert(0, nums.pop())
         return nums
-        # 第三种方法
+        # 方法三
         k = k % len(nums)
         nums[:] = nums[-k:] + nums[:-k]
         return nums
@@ -317,6 +317,22 @@
     ```
 
 9. [加一](https://leetcode-cn.com/problems/plus-one/)
+
+```py
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+      # 方法一
+      # num =  functools.reduce(lambda x, y: x * 10 + y, digits) + 1
+      # return [int(n) for n in str(num)]
+      # 方法二
+      if digits == []: return [1]
+      last = digits.pop()
+      if last == 9:
+        digits = self.plusOne(digits) + [0]
+      else:
+        digits.append(last + 1)
+      return digits
+```
 
 #### 中等
 
