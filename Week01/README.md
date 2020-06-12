@@ -27,8 +27,8 @@
 
 ### LeetCode
 
-LeetCode 官网：[https://leetcode.com/](https://leetcode.com/)
-LeetCode 中文社区：[https://leetcode.com/](https://leetcode.com/)
+- LeetCode 官网：[https://leetcode.com/](https://leetcode.com/)
+- LeetCode 中文社区：[https://leetcode.com/](https://leetcode.com/)
 
 ### 数据结构与算法总览
 
@@ -111,14 +111,64 @@ LeetCode 中文社区：[https://leetcode.com/](https://leetcode.com/)
     1. [两数之和](https://leetcode-cn.com/problems/two-sum/)
     2. [移动零](https://leetcode-cn.com/problems/move-zeroes/)
     3. [盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/) 使用 「左右夹逼」双指针的方法解决
-    4. [爬楼梯](https://leetcode.com/problems/climbing-stairs/)
+    4. [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
     5. [三数之和](https://leetcode-cn.com/problems/3sum/)
 - Linked List 实战题目
-    1. [反转链表](https://leetcode.com/problems/reverse-linked-list/)
-    2. [两两交换链表中的节点](https://leetcode.com/problems/swap-nodes-in-pairs)
-    3. [环形链表](https://leetcode.com/problems/linked-list-cycle)
-    4. [环形链表 II](https://leetcode.com/problems/linked-list-cycle-ii)
-    5. [K 个一组翻转链表](https://leetcode.com/problems/reverse-nodes-in-k-group/)
+    1. [反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
+
+        ```python
+        # Definition for singly-linked list.
+        # class ListNode:
+        #     def __init__(self, x):
+        #         self.val = x
+        #         self.next = None
+
+        class Solution:
+            def reverseList(self, head: ListNode) -> ListNode:
+                # 迭代
+                cur, prev = head, None
+                while cur:
+                    prev, cur.next, cur, = cur, prev, cur.next
+                return prev
+                # 递归
+                # if not (head and head.next):
+                #     return head
+                # new_head = self.reverseList(head.next)
+                # head.next.next, head.next = head, None
+                # return new_head
+        ```
+
+    2. [两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs) 图解 [Python | Dummynode](https://leetcode.com/problems/swap-nodes-in-pairs/discuss/171788/Python-or-Dummynode)
+
+        ```py
+        # Definition for singly-linked list.
+        # class ListNode:
+        #     def __init__(self, x):
+        #         self.val = x
+        #         self.next = None
+
+        class Solution:
+            def swapPairs(self, head: ListNode) -> ListNode:
+                # 迭代
+                dummy = cur = ListNode(0)
+                cur.next = head
+                while cur.next and cur.next.next:
+                    fir, sec = cur.next, cur.next.next
+                    cur.next, fir.next, sec.next = sec, sec.next, fir
+                    cur = cur.next.next
+                return dummy.next
+                # 递归
+                # if not head or not head.next:
+                #     return head
+                # new_start = head.next.next
+                # head, head.next = head.next, head
+                # head.next.next = self.swapPairs(new_start)
+                # return head
+        ```
+
+    3. [环形链表](https://leetcode-cn.com/problems/linked-list-cycle)
+    4. [环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii)
+    5. [K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)
 
 #### 常见问题解决办法
 
@@ -233,7 +283,39 @@ LeetCode 中文社区：[https://leetcode.com/](https://leetcode.com/)
 
 6. [合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/)
 7. [两数之和](https://leetcode-cn.com/problems/two-sum/)
+
+      ```python
+      class Solution:
+          def twoSum(self, nums: List[int], target: int) -> List[int]:
+            # 暴力解法，时间复杂度 O(n²)
+            for i, m in enumerate(nums):
+              for j, n in enumerate(nums[i + 1:], i + 1):
+                if m + n == target:
+                  return [i, j]
+            return []
+            # hash，时间复杂度 O(n)
+            d = {}
+            for i, n in enumerate(nums):
+              if taget - n in d:
+                return [d[taget - n], i]
+            return []
+      ```
+
 8. [移动零](https://leetcode-cn.com/problems/move-zeroes/)
+
+    ```python
+    class Solution:
+        def moveZeroes(self, nums: List[int]) -> None:
+            """
+            Do not return anything, modify nums in-place instead.
+            """
+            cur = 0
+            for i, n in enumerate(nums):
+              if n == 0: continue
+              nums[cur], nums[i] = n, nums[cur]
+              cur += 1
+    ```
+
 9. [加一](https://leetcode-cn.com/problems/plus-one/)
 
 #### 中等
