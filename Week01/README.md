@@ -1,12 +1,13 @@
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
-  - [预习第一课](#预习第一课)
+  - [预习课程](#预习课程)
+    - [LeetCode](#leetcode)
     - [数据结构与算法总览](#数据结构与算法总览)
-      - [切题四件套](#切题四件套)
-      - [五毒练习法](#五毒练习法)
-      - [刷题核心思想和误区](#刷题核心思想和误区)
-      - [Know Thy Complexities!](#know-thy-complexities)
+    - [切题四件套](#切题四件套)
+    - [五毒练习法](#五毒练习法)
+    - [刷题核心思想和误区](#刷题核心思想和误区)
+    - [Know Thy Complexities!](#know-thy-complexities)
   - [第一周](#第一周)
     - [第三课 | 数组、链表、跳表](#第三课--数组链表跳表)
       - [数组、链表、跳表的基本实现和特性](#数组链表跳表的基本实现和特性)
@@ -22,11 +23,18 @@
     - [下周预习](#下周预习)
       - [预习题目](#预习题目)
 
-## 预习第一课
+## 预习课程
+
+### LeetCode
+
+LeetCode 官网：[https://leetcode.com/](https://leetcode.com/)
+LeetCode 中文社区：[https://leetcode.com/](https://leetcode.com/)
 
 ### 数据结构与算法总览
 
-#### 切题四件套
+待补充......
+
+### 切题四件套
 
 - Clarification
 - Possible solutions
@@ -35,7 +43,7 @@
 - Coding（多写）
 - Test cases
 
-#### 五毒练习法
+### 五毒练习法
 
 1. 刷题第一遍
     1. 5 分钟：读题 + 思考（最多不要超过 15 分钟）
@@ -51,14 +59,14 @@
 4. 刷题第四遍：时隔一周后，反复回来练习相同的题目
 5. 刷题第五遍：面试前一周进行恢复性训练
 
-#### 刷题核心思想和误区
+### 刷题核心思想和误区
 
 - 思想
     1. 重复刷题至少刷 5 遍
     2. 优化方法：空间换时间、升维（二维）
 - 误区：做题只做一遍
 
-#### [Know Thy Complexities!](https://www.bigocheatsheet.com/)
+### [Know Thy Complexities!](https://www.bigocheatsheet.com/)
 
 - Big-O Complexity Chart
 
