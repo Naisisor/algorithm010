@@ -13,8 +13,14 @@
       - [实战题目解析](#实战题目解析)
       - [常见问题解决办法](#常见问题解决办法)
     - [第四课 | 栈、队列、优先队列、双端队列](#第四课--栈队列优先队列双端队列)
+      - [栈和队列的实现与特性](#栈和队列的实现与特性)
       - [实战题目解析](#实战题目解析-1)
     - [作业](#作业)
+      - [简单](#简单)
+      - [中等](#中等)
+      - [困难](#困难)
+    - [下周预习](#下周预习)
+      - [预习题目](#预习题目)
 
 ## 预习第一课
 
@@ -116,6 +122,8 @@
 
 ### 第四课 | 栈、队列、优先队列、双端队列
 
+#### 栈和队列的实现与特性
+
 - Stack（栈）：
   - 特征：后进先出（LIFO），添加、删除皆为 O(1)，查询 O(n)
   - 查询资料关键字，比如 Java 资料，搜索关键字为 stack java 10
@@ -143,8 +151,20 @@
 
 ### 作业
 
+#### 简单
+
 1. 用 add first 或 add last 这套新的 API 改写 Deque 的代码
+
+    ```python
+    # 待补充......
+    ```
+
 2. 分析 Queue 和 Priority Queue 的源码
+
+    ```python
+    # 待补充......
+    ```
+
 3. [删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 
     ```python
@@ -182,11 +202,13 @@
         Do not return anything, modify nums in-place instead.
         """
         # 第一种方法
+        k = k % len(nums)
         while k != 0:
             nums.insert(0, nums.pop())
             k -= 1
         return nums
         # 第二种方法
+        k = k % len(nums)
         for _ in range(k):
             nums.insert(0, nums.pop())
         return nums
@@ -200,3 +222,24 @@
 
     ```python
     ```
+
+6. [合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/)
+7. [两数之和](https://leetcode-cn.com/problems/two-sum/)
+8. [移动零](https://leetcode-cn.com/problems/move-zeroes/)
+9. [加一](https://leetcode-cn.com/problems/plus-one/)
+
+#### 中等
+
+1. [设计循环双端队列](https://leetcode.com/problems/design-circular-deque)
+
+#### 困难
+
+1. [接雨水](https://leetcode.com/problems/trapping-rain-water/)
+
+### 下周预习
+
+#### 预习题目
+
+1. [有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/description/)
+2. [二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+3. [最小的 k 个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/)
