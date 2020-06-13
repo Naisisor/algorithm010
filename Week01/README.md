@@ -130,12 +130,14 @@
                 while cur:
                     prev, cur.next, cur, = cur, prev, cur.next
                 return prev
+
+            def reverseList1(self, head: ListNode) -> ListNode:
                 # 递归
-                # if not (head and head.next):
-                #     return head
-                # new_head = self.reverseList(head.next)
-                # head.next.next, head.next = head, None
-                # return new_head
+                if not (head and head.next):
+                    return head
+                new_head = self.reverseList(head.next)
+                head.next.next, head.next = head, None
+                return new_head
         ```
 
     2. [两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs) 图解 [Python | Dummynode](https://leetcode.com/problems/swap-nodes-in-pairs/discuss/171788/Python-or-Dummynode)
@@ -157,13 +159,15 @@
                     cur.next, fir.next, sec.next = sec, sec.next, fir
                     cur = cur.next.next
                 return dummy.next
+
+            def swapPairs1(self, head: ListNode) -> ListNode:
                 # 递归
-                # if not head or not head.next:
-                #     return head
-                # new_start = head.next.next
-                # head, head.next = head.next, head
-                # head.next.next = self.swapPairs(new_start)
-                # return head
+                if not head or not head.next:
+                    return head
+                new_start = head.next.next
+                head, head.next = head.next, head
+                head.next.next = self.swapPairs(new_start)
+                return head
         ```
 
     3. [环形链表](https://leetcode-cn.com/problems/linked-list-cycle)
@@ -229,7 +233,6 @@
     class Solution:
         def removeDuplicates(self, nums: List[int]) -> int:
             # 时间复杂度 O(n)
-            # 方法一
             i = 1
             n = len(nums)
             while i < n:
@@ -239,7 +242,9 @@
                 else:
                     i += 1
             return nums
-            # 方法二
+
+        def removeDuplicates1(self, nums: List[int]) -> int:
+          # 时间复杂度 O(n)
             if len(nums) == 0:
                 return 0
             i = 0
@@ -256,50 +261,81 @@
     ```python
     class Solution:
         def rotate(self, nums: List[int], k: int) -> None:
-        """
-        Do not return anything, modify nums in-place instead.
-        """
-        # 方法一
-        k = k % len(nums)
-        while k != 0:
-            nums.insert(0, nums.pop())
-            k -= 1
-        return nums
-        # 方法二
-        k = k % len(nums)
-        for _ in range(k):
-            nums.insert(0, nums.pop())
-        return nums
-        # 方法三
-        k = k % len(nums)
-        nums[:] = nums[-k:] + nums[:-k]
-        return nums
+          """
+          Do not return anything, modify nums in-place instead.
+          """
+          k = k % len(nums)
+          while k != 0:
+              nums.insert(0, nums.pop())
+              k -= 1
+          return nums
+
+        def rotate1(self, nums: List[int], k: int) -> None:
+          for _ in range(k):
+              nums.insert(0, nums.pop())
+          return nums
+
+        def rotate2(self, nums: List[int], k: int) -> None:
+          k = k % len(nums)
+          nums[:] = nums[-k:] + nums[:-k]
+          return nums
     ```
 
 5. [合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
 
     ```python
+    # Definition for singly-linked list.
+    # class ListNode:
+    #     def __init__(self, val=0, next=None):
+    #         self.val = val
+    #         self.next = next
+
+    class Solution:
+        def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+            # 迭代 iteratively
+            prev = prehead = ListNode(0)
+            while l1 and l2:
+                if l1.val < l2.val:
+                    prev.next, l1 = l1, l1.next
+                else:
+                    prev.next, l2 = l2, l2.next
+                prev = prev.next
+            prev.next = l1 if l1 else l2
+            return prehead.next
+
+        def mergeTwoLists2(self, l1: ListNode, l2: ListNode) -> ListNode:
+            # 递归 recursively
+            if l1 is None: return l2
+            if l2 is None: return l1
+            if l1.val < l2.val:
+                l1.next = self.mergeTwoLists(l1.next, l2)
+                return l1
+            else:
+                l2.next =  self.mergeTwoLists(l2.next, l1)
+                return l2
     ```
 
 6. [合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/)
 7. [两数之和](https://leetcode-cn.com/problems/two-sum/)
 
-      ```python
-      class Solution:
-          def twoSum(self, nums: List[int], target: int) -> List[int]:
-            # 暴力解法，时间复杂度 O(n²)
-            for i, m in enumerate(nums):
-              for j, n in enumerate(nums[i + 1:], i + 1):
-                if m + n == target:
-                  return [i, j]
-            return []
-            # hash，时间复杂度 O(n)
-            d = {}
-            for i, n in enumerate(nums):
-              if taget - n in d:
-                return [d[taget - n], i]
-            return []
-      ```
+    ```python
+    class Solution:
+        def twoSum(self, nums: List[int], target: int) -> List[int]:
+          # 暴力解法，时间复杂度 O(n²)
+          for i, m in enumerate(nums):
+            for j, n in enumerate(nums[i + 1:], i + 1):
+              if m + n == target:
+                return [i, j]
+          return []
+
+        def twoSum2(self, nums: List[int], target: int) -> List[int]:
+          # hash，时间复杂度 O(n)
+          d = {}
+          for i, n in enumerate(nums):
+            if taget - n in d:
+              return [d[taget - n], i]
+          return []
+    ```
 
 8. [移动零](https://leetcode-cn.com/problems/move-zeroes/)
 
@@ -318,21 +354,21 @@
 
 9. [加一](https://leetcode-cn.com/problems/plus-one/)
 
-```py
-class Solution:
-    def plusOne(self, digits: List[int]) -> List[int]:
-      # 方法一
-      # num =  functools.reduce(lambda x, y: x * 10 + y, digits) + 1
-      # return [int(n) for n in str(num)]
-      # 方法二
-      if digits == []: return [1]
-      last = digits.pop()
-      if last == 9:
-        digits = self.plusOne(digits) + [0]
-      else:
-        digits.append(last + 1)
-      return digits
-```
+    ```python
+    class Solution:
+        def plusOne(self, digits: List[int]) -> List[int]:
+          num =  functools.reduce(lambda x, y: x * 10 + y, digits) + 1
+          return [int(n) for n in str(num)]  # or return list(map(int, str(num)))
+
+        def plusOne1(self, digits: List[int]) -> List[int]:
+          if digits == []: return [1]
+          last = digits.pop()
+          if last == 9:
+            digits = self.plusOne(digits) + [0]
+          else:
+            digits.append(last + 1)
+          return digits
+    ```
 
 #### 中等
 
