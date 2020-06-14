@@ -113,6 +113,62 @@
     3. [盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/) 使用 「左右夹逼」双指针的方法解决
     4. [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
     5. [三数之和](https://leetcode-cn.com/problems/3sum/)
+
+        ```python
+        class Solution:
+            def threeSum(self, nums: List[int]) -> List[List[int]]:
+                # 三重循环暴力解法， 时间复杂度 O(n^3)
+                nums.sort()
+                res = []
+                for i in range(len(nums)):
+                    for j in range(i + 1, len(nums)):
+                        for k in range(j + 1, len(nums)):
+                            if nums[i] + nums[j] + nums[k] == 0:
+                                cell = sorted([nums[i], nums[j], nums[k]])
+                                if cell not in res:
+                                    res.append(cell)
+                return res
+
+            def threeSum1(self, nums: List[int]) -> List[List[int]]:
+                # hash 解法，时间复杂度 O(n²)
+                nums.sort()
+                target_hash = {-x: i for i, x in enumerate(nums)}
+                res = []
+                for i in range(len(nums)):
+                    for j in range(i + 1, len(nums)):
+                        if nums[i] + nums[j] in target_hash:
+                            t_index = target_hash[nums[i] + nums[j]]
+                            if t_index == i or t_index == j:
+                                continue
+                            c = sorted([nums[i] , nums[j], nums[t_index]])
+                            if c not in res:
+                                res.append(c)
+                return res
+
+            def threeSum2(self, nums: List[int]) -> List[List[int]]:
+                # 排序、双指针，左右夹逼，时间复杂度 O(n²)
+                # 双指针方法通常先排序
+                nums.sort()
+                res = []
+                for k in range(len(nums) - 2):
+                    if nums[k] > 0: break
+                    if k > 0 and nums[k] == nums[k - 1]: continue
+                    i, j = k + 1, len(nums) - 1
+                    while i < j:
+                        s = nums[i] + nums[j] + nums[k]
+                        if s < 0:
+                            i += 1
+                        elif s > 0:
+                            j -= 1
+                        else:
+                            res.append([nums[k], nums[i], nums[j]])
+                            i += 1
+                            j -= 1
+                            while i < j and nums[i] == nums[i - 1]: i += 1
+                            while i < j and nums[j] == nums[j + 1]: j -= 1
+                return res
+        ```
+
 - Linked List 实战题目
     1. [反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
 
@@ -142,7 +198,7 @@
 
     2. [两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs) 图解 [Python | Dummynode](https://leetcode.com/problems/swap-nodes-in-pairs/discuss/171788/Python-or-Dummynode)
 
-        ```py
+        ```python
         # Definition for singly-linked list.
         # class ListNode:
         #     def __init__(self, x):
@@ -323,6 +379,15 @@
           """
           Do not return anything, modify nums1 in-place instead.
           """
+          # 暴力解法
+          while len(nums1) > m:
+            nums1.pop()
+          while len(nums2) > n:
+            nums2.pop()
+          nums1.extend(nums2)
+          nums1.sort()
+
+        def merge1(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
           while m > 0 and n > 0:
             if nums1[m - 1] > nums2[n - 1]:
                 nums1[m + n - 1] = nums1[m - 1]
@@ -330,9 +395,11 @@
             else:
                 nums1[m + n - 1] = nums2[n - 1]
                 n -= 1
-          nums1[:n] = nums2[:n]
+          while n > 0:
+            nums1[m + n - 1] = nums2[n - 1]
+            n -= 1
 
-        def merge1(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        def merge2(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
           # 切片
           nums1[m:] = nums2[:n]
           nums1.sort()
