@@ -82,7 +82,9 @@
     1. 查询，时间复杂度 O(logn)
     2. 插入新节点（创建），时间复杂度 O(logn)
     3. 删除，时间复杂度 O(logn)
-   **二叉搜索树的特点就是大部分的操作的时间复杂度都是 O(logn)**
+        **二叉搜索树的特点就是大部分的操作的时间复杂度都是 O(logn)**
+- 其它
+  - [树的遍历 Demo](https://visualgo.net/zh/bst)
 - 思考题
   - 树的面试题解法一般都是递归，为什么？
 
@@ -115,6 +117,36 @@
     ```
 
 4. [N 叉树的前序遍历](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/description/)
+
+    ```python
+    """
+    # Definition for a Node.
+    class Node:
+        def __init__(self, val=None, children=None):
+            self.val = val
+            self.children = children
+    """
+
+    class Solution:
+        def preorder(self, root: 'Node') -> List[int]:
+            # 递归
+            if not root:
+                return []
+            res = [root.val]
+            for child in root.children:
+                res.extend(seld.preorder(child))
+            return res
+
+        def preorder1(self, root: 'Node') -> List[int]:
+            # 迭代
+            res, stack = [], root and [root]
+            while stack:
+                node = stack.pop()
+                res.append(node.val)
+                stack.extend(reversed(node.children))
+            return res
+    ```
+
 5. 自学 [HeapSort](https://www.geeksforgeeks.org/heap-sort/)
 
 #### 中等
