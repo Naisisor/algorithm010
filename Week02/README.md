@@ -11,7 +11,7 @@
     - [第 6 课 | 堆和二叉堆、图](#第-6-课--堆和二叉堆图)
       - [堆和二叉堆的实现和特性](#堆和二叉堆的实现和特性)
       - [实战题目解析](#实战题目解析-2)
-      - [图](#图)
+      - [图（了解）](#图了解)
     - [作业](#作业)
       - [简单](#简单)
       - [中等](#中等)
@@ -125,7 +125,7 @@
 1. [最小的 k 个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/)
 2. [滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)
 
-#### 图
+#### 图（了解）
 
 - 图的属性和分类：待补充......
 - 基于图相关的算法：待补充......
@@ -141,9 +141,29 @@
 
 1. 写一个关于 HashMap 的小总结。(Java)
 2. [有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/description/)
+
+    ```python
+    class Solution:
+        def isAnagram(self, s: str, t: str) -> bool:
+            return sorted(s) == sorted(t)
+
+        def isAnagram1(self, s: str, t: str) -> bool:
+            d = {} # d = collections.defaultdict(int)
+            for _s in s:
+                d[_s] = d.get(_s, 0) + 1
+            for _t in t:
+                if _t not in d:
+                    return False
+                d[_t] -= 1
+            return not any(d.values())
+
+        def isAnagram2(self, s: str, t: str) -> bool:
+            return collections.Counter(s) == collections.Counter(t)
+    ```
+
 3. [两数之和](https://leetcode-cn.com/problems/two-sum/description/)
 
-    ```py
+    ```python
     class Solution:
         def twoSum(self, nums: List[int], target: int) -> List[int]:
             # hash，O(n)
