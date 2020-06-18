@@ -11,6 +11,7 @@
     - [第 6 课 | 堆和二叉堆、图](#第-6-课--堆和二叉堆图)
       - [堆和二叉堆的实现和特性](#堆和二叉堆的实现和特性)
       - [实战题目解析](#实战题目解析-2)
+      - [图](#图)
     - [作业](#作业)
       - [简单](#简单)
       - [中等](#中等)
@@ -85,6 +86,8 @@
         **二叉搜索树的特点就是大部分的操作的时间复杂度都是 O(logn)**
 - 其它
   - [树的遍历 Demo](https://visualgo.net/zh/bst)
+  - [All DFS traversals (preorder, inorder, postorder) in Python in 1 line
+](https://leetcode.com/problems/binary-tree-inorder-traversal/discuss/283746/All-DFS-traversals-(preorder-inorder-postorder)-in-Python-in-1-line)
 - 思考题
   - 树的面试题解法一般都是递归，为什么？
 
@@ -94,7 +97,43 @@
 
 #### 堆和二叉堆的实现和特性
 
+- 堆（Heap）
+  - Heap：可以迅速找到一堆数中的最大或者最小值的数据结构物
+  - 将根节点最大的堆叫做顶推或大根堆，根节点最小的堆叫做小顶堆或者小根堆。常见的堆有二叉堆、斐波那契堆等
+  - 假设是大顶堆，则常见操作（API）：
+    - find-max: O(1)
+    - delete-max: O(logn)
+    - insert(creat): O(logn) or O(1)
+    - 不同实现的比较：[https://en.wikipedia.org/wiki/Heap_(data_structure)](https://en.wikipedia.org/wiki/Heap_(data_structure))
+  - 参考链接
+    - [维基百科：堆（Heap）](https://en.wikipedia.org/wiki/Heap_(data_structure))
+    - 堆的实现代码: [https://shimo.im/docs/Lw86vJzOGOMpWZz2/]( https://shimo.im/docs/Lw86vJzOGOMpWZz2/)
+- 二叉堆
+  - 二叉堆是通过完全二叉树来实现（注意：不是二叉搜索树）
+  - 二叉堆（大顶）它满足以下性质
+    1. 是一颗完全树
+    2. 树中任意节点的值总是 >= 其子节点的值
+  - 二叉堆的实现细节
+    1. 二叉堆一般都是通过 `数组` 来实现的
+    2. 假设「第一个元素」 在数组中的索引未 0 的话，则父节点和子节点的位置关系如下：
+       1. 索引为 `i` 的左孩子的索引为 `2 * i + 1`
+       2. 索引为 `i` 的右孩子的索引为 `2 * i + 2`
+       3. 索引为  `i` 的父节点的索引为 `floor((i - 1) / 2)`
+
 #### 实战题目解析
+
+1. [最小的 k 个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/)
+2. [滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)
+
+#### 图
+
+- 图的属性和分类：待补充......
+- 基于图相关的算法：待补充......
+- 参考链接
+  1. [连通图个数](https://leetcode-cn.com/problems/number-of-islands/)
+  2. [拓扑排序（Topological Sorting）](https://zhuanlan.zhihu.com/p/34871092)
+  3. [最短路径（Shortest Path）：Dijkstra](https://www.bilibili.com/video/av25829980?from=search&seid=13391343514095937158)
+  4. [最小生成树（Minimum Spanning Tree）](https://www.bilibili.com/video/av84820276?from=search&seid=17476598104352152051)
 
 ### 作业
 
@@ -136,6 +175,8 @@
             for child in root.children:
                 res.extend(seld.preorder(child))
             return res
+            # 或者，用一行代码搞定
+            # return root and sum([[root.val], *map(self.preorder, root.children)], [])
 
         def preorder1(self, root: 'Node') -> List[int]:
             # 迭代
@@ -153,6 +194,40 @@
 
 1. [字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)
 2. [二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+
+    ```python
+    # Definition for a binary tree node.
+    # class TreeNode:
+    #     def __init__(self, x):
+    #         self.val = x
+    #         self.left = None
+    #         self.right = None
+
+    class Solution:
+        def inorderTraversal(self, root: TreeNode) -> List[int]:
+            # 递归
+            if not root:
+                return []
+            res = []
+            res.extend(self.inorderTraversal(root.left))
+            res.append(root.val)
+            res.extend(self.inorderTraversal(root.right))
+            return res
+
+        def inorderTraversal1(self, root: TreeNode) -> List[int]:
+            # 迭代
+            ans, stack = [], []
+            while stack or root:
+                if root:
+                    stack.append(root)
+                    root = root.left
+                else:
+                    __root = stack.pop()
+                    ans.append(__root.val)
+                    root = __root.right
+            return ans
+    ```
+
 3. [二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)
 4. [N 叉树的层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)
 5. [丑数](https://leetcode-cn.com/problems/chou-shu-lcof/)
