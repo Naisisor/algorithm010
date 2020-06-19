@@ -24,7 +24,9 @@
 
 #### 哈希表、映射、集合的实现与特性
 
-待补充.....
+- 哈希表（Hash Table）
+  - 哈希表（Hash Table），也叫散列表，是根据关键码值（key value）而直接进行访问的数据，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫作散列函数（Hash Function），存放记录的数组叫哈希表（或散列表）
+  - 工程实践：电话号码薄、用户信息表、缓存（LRU Cache）、键值对存储(Redis)等。
 
 #### 实战题目解析
 
@@ -119,6 +121,13 @@
        1. 索引为 `i` 的左孩子的索引为 `2 * i + 1`
        2. 索引为 `i` 的右孩子的索引为 `2 * i + 2`
        3. 索引为  `i` 的父节点的索引为 `floor((i - 1) / 2)`
+  - 常用操作
+    - Insert 插入操作，时间复杂度 O(logn)
+      1. 新元素一律插入到堆的尾部
+      2. 依次向上调整整个堆的结构（一直到根即可）HeapifyUp
+    - Delete Max 删除堆顶操作
+      1. 将堆尾元素替换到顶部（即堆顶被替换删除掉）
+      2. 依次从根部向下调整整个堆的结构（一直到堆尾即可）HeapifyDown
 
 #### 实战题目解析
 
@@ -139,7 +148,7 @@
 
 #### 简单
 
-1. 写一个关于 HashMap 的小总结。(Java)
+1. 写一个关于 HashMap 的小总结（Java）。参考 [史上最全的Java容器集合之HashMap（源码解读）](https://juejin.im/post/5dedb448f265da33b071716a)
 2. [有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/description/)
 
     ```python
@@ -213,6 +222,18 @@
 #### 中等
 
 1. [字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)
+
+    ```python
+    class Solution:
+        def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+            # hash，O(n)
+            d = collections.defaultdict(list)
+            for s in strs:
+                key = ''.join(sorted(s))
+                d[key].append(s)
+            return list(d.values())
+    ```
+
 2. [二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
 
     ```python
