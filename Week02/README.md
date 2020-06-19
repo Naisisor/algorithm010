@@ -27,6 +27,9 @@
 - 哈希表（Hash Table）
   - 哈希表（Hash Table），也叫散列表，是根据关键码值（key value）而直接进行访问的数据，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫作散列函数（Hash Function），存放记录的数组叫哈希表（或散列表）
   - 工程实践：电话号码薄、用户信息表、缓存（LRU Cache）、键值对存储(Redis)等。
+  - 参考链接
+    1. [Java Set 文档](http://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/util/Set.html)
+    2. [Java Map 文档](http://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/util/Map.html)
 
 #### 实战题目解析
 
@@ -226,12 +229,12 @@
     ```python
     class Solution:
         def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-            # hash，O(n)
-            d = collections.defaultdict(list)
+            # 时间复杂度：O(NKlogK)，其中 NN 是 strs 的长度，而 K 是 strs 中字符串的最大长度。当我们遍历每个字符串时，外部循环具有的复杂度为 O(N)。然后，我们在 O(KlogK) 的时间内对每个字符串排序。
+            # 空间复杂度：O(NK)，排序存储在 ans 中的全部信息内容。
+            ans = collections.defaultdict(list)
             for s in strs:
-                key = ''.join(sorted(s))
-                d[key].append(s)
-            return list(d.values())
+                ans[tuple(sorted(s))].append(s)
+            return list(ans.values())
     ```
 
 2. [二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
