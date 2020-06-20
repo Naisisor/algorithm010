@@ -167,9 +167,9 @@
             return sorted(s) == sorted(t)
 
         def isAnagram1(self, s: str, t: str) -> bool:
-            d = {} # d = collections.defaultdict(int)
+            d = collections.defaultdict(int)
             for _s in s:
-                d[_s] = d.get(_s, 0) + 1
+                d[_s] += 1
             for _t in t:
                 if _t not in d:
                     return False
@@ -215,7 +215,7 @@
                 res.extend(seld.preorder(child))
             return res
             # 或者，用一行代码搞定
-            # return root and sum([[root.val], *map(self.preorder, root.children)], [])
+            # return root and sum([[root.val], *map(self.preorder, root.children)], []) or []
 
         def preorder1(self, root: 'Node') -> List[int]:
             # 迭代
@@ -273,9 +273,9 @@
                     stack.append(root)
                     root = root.left
                 else:
-                    __root = stack.pop()
-                    ans.append(__root.val)
-                    root = __root.right
+                    _root = stack.pop()
+                    ans.append(_root.val)
+                    root = _root.right
             return ans
     ```
 
@@ -315,6 +315,26 @@
     ```
 
 4. [N 叉树的层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)
+
+```python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        q, ans = [root], []
+        while any(q):
+            ans.append([n.val for n in q])
+            q = [child for node in q for child in node.children if child]
+
+        return ans
+```
+
 5. [丑数](https://leetcode-cn.com/problems/chou-shu-lcof/)
 6. [前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)
 
