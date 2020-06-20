@@ -33,9 +33,9 @@
 
 #### 实战题目解析
 
-- [有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/description/)
-- [字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)
-- [两数之和](https://leetcode-cn.com/problems/two-sum/description/)
+1. [有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/description/)
+2. [字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)
+3. [两数之和](https://leetcode-cn.com/problems/two-sum/description/)
 
 ### 第 6 课 | 树、二叉树、二叉搜索树
 

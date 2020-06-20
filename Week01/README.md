@@ -12,6 +12,8 @@
     - [第 3 课 | 数组、链表、跳表](#第-3-课--数组链表跳表)
       - [数组、链表、跳表的基本实现和特性](#数组链表跳表的基本实现和特性)
       - [实战题目解析](#实战题目解析)
+        - [Array 实战题目](#array-实战题目)
+        - [Linked List 实战题目](#linked-list-实战题目)
       - [常见问题解决办法](#常见问题解决办法)
     - [第 4 课 | 栈、队列、优先队列、双端队列](#第-4-课--栈队列优先队列双端队列)
       - [栈和队列的实现与特性](#栈和队列的实现与特性)
@@ -107,129 +109,131 @@
 
 #### 实战题目解析
 
-- Array 实战题目
-    1. [两数之和](https://leetcode-cn.com/problems/two-sum/)
-    2. [移动零](https://leetcode-cn.com/problems/move-zeroes/)
-    3. [盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/) 使用 「左右夹逼」双指针的方法解决
-    4. [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
-    5. [三数之和](https://leetcode-cn.com/problems/3sum/)
+##### Array 实战题目
 
-        ```python
-        class Solution:
-            def threeSum(self, nums: List[int]) -> List[List[int]]:
-                # 三重循环暴力解法， 时间复杂度 O(n³)
-                nums.sort()
-                res = []
-                for i in range(len(nums)):
-                  for j in range(i + 1, len(nums)):
-                    for k in range(j + 1, len(nums)):
-                      if nums[i] + nums[j] + nums[k] == 0:
-                        item = sorted([nums[i], nums[j], nums[k]])
-                        if item not in res:
-                            res.append(item)
-                return res
+1. [两数之和](https://leetcode-cn.com/problems/two-sum/)
+2. [移动零](https://leetcode-cn.com/problems/move-zeroes/)
+3. [盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/) 使用 「左右夹逼」双指针的方法解决
+4. [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
+5. [三数之和](https://leetcode-cn.com/problems/3sum/)
 
-            def threeSum1(self, nums: List[int]) -> List[List[int]]:
-                # hash 解法，时间复杂度 O(n²)
-                nums.sort()
-                d = {-x: i for i, x in enumerate(nums)}
-                res = []
-                for i in range(len(nums)):
-                  if nums[i] > 0: break
-                  for j in range(i + 1, len(nums)):
-                    if nums[i] + nums[j] in d:
-                      index = d[nums[i] + nums[j]]
-                      if index in (i, j):
-                        continue
-                      c = sorted([nums[i] , nums[j], nums[index]])
-                      if c not in res:
-                        res.append(c)
-                return res
+    ```python
+    class Solution:
+        def threeSum(self, nums: List[int]) -> List[List[int]]:
+            # 三重循环暴力解法， 时间复杂度 O(n³)
+            nums.sort()
+            res = []
+            for i in range(len(nums)):
+              for j in range(i + 1, len(nums)):
+                for k in range(j + 1, len(nums)):
+                  if nums[i] + nums[j] + nums[k] == 0:
+                    item = sorted([nums[i], nums[j], nums[k]])
+                    if item not in res:
+                        res.append(item)
+            return res
 
-            def threeSum2(self, nums: List[int]) -> List[List[int]]:
-                # 排序、双指针，左右夹逼，时间复杂度 O(n²)
-                # 双指针方法通常先排序
-                nums.sort()
-                res = []
-                for k in range(len(nums) - 2):
-                  if nums[k] > 0: break
-                  if k > 0 and nums[k] == nums[k - 1]: continue
-                  i, j = k + 1, len(nums) - 1
-                  while i < j:
-                    s = nums[i] + nums[j] + nums[k]
-                    if s < 0:
-                      i += 1
-                    elif s > 0:
-                      j -= 1
-                    else:
-                      res.append([nums[k], nums[i], nums[j]])
-                      i += 1
-                      j -= 1
-                      while i < j and nums[i] == nums[i - 1]: i += 1
-                      while i < j and nums[j] == nums[j + 1]: j -= 1
-                return res
-        ```
+        def threeSum1(self, nums: List[int]) -> List[List[int]]:
+            # hash 解法，时间复杂度 O(n²)
+            nums.sort()
+            d = {-x: i for i, x in enumerate(nums)}
+            res = []
+            for i in range(len(nums)):
+              if nums[i] > 0: break
+              for j in range(i + 1, len(nums)):
+                if nums[i] + nums[j] in d:
+                  index = d[nums[i] + nums[j]]
+                  if index in (i, j):
+                    continue
+                  c = sorted([nums[i] , nums[j], nums[index]])
+                  if c not in res:
+                    res.append(c)
+            return res
 
-- Linked List 实战题目
-    1. [反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
+        def threeSum2(self, nums: List[int]) -> List[List[int]]:
+            # 排序、双指针，左右夹逼，时间复杂度 O(n²)
+            # 双指针方法通常先排序
+            nums.sort()
+            res = []
+            for k in range(len(nums) - 2):
+              if nums[k] > 0: break
+              if k > 0 and nums[k] == nums[k - 1]: continue
+              i, j = k + 1, len(nums) - 1
+              while i < j:
+                s = nums[i] + nums[j] + nums[k]
+                if s < 0:
+                  i += 1
+                elif s > 0:
+                  j -= 1
+                else:
+                  res.append([nums[k], nums[i], nums[j]])
+                  i += 1
+                  j -= 1
+                  while i < j and nums[i] == nums[i - 1]: i += 1
+                  while i < j and nums[j] == nums[j + 1]: j -= 1
+            return res
+    ```
 
-        ```python
-        # Definition for singly-linked list.
-        # class ListNode:
-        #     def __init__(self, x):
-        #         self.val = x
-        #         self.next = None
+##### Linked List 实战题目
 
-        class Solution:
-            def reverseList(self, head: ListNode) -> ListNode:
-                # 迭代
-                cur, prev = head, None
-                while cur:
-                    prev, cur.next, cur, = cur, prev, cur.next
-                return prev
+ 1. [反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
 
-            def reverseList1(self, head: ListNode) -> ListNode:
-                # 递归
-                if not (head and head.next):
-                    return head
-                new_head = self.reverseList(head.next)
-                head.next.next, head.next = head, None
-                return new_head
-        ```
+     ```python
+     # Definition for singly-linked list.
+     # class ListNode:
+     #     def __init__(self, x):
+     #         self.val = x
+     #         self.next = None
 
-    2. [两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs) 图解 [Python | Dummynode](https://leetcode.com/problems/swap-nodes-in-pairs/discuss/171788/Python-or-Dummynode)
+     class Solution:
+         def reverseList(self, head: ListNode) -> ListNode:
+             # 迭代
+             cur, prev = head, None
+             while cur:
+                 prev, cur.next, cur, = cur, prev, cur.next
+             return prev
 
-        ```python
-        # Definition for singly-linked list.
-        # class ListNode:
-        #     def __init__(self, x):
-        #         self.val = x
-        #         self.next = None
+         def reverseList1(self, head: ListNode) -> ListNode:
+             # 递归
+             if not (head and head.next):
+                 return head
+             new_head = self.reverseList(head.next)
+             head.next.next, head.next = head, None
+             return new_head
+     ```
 
-        class Solution:
-            def swapPairs(self, head: ListNode) -> ListNode:
-                # 迭代
-                dummy = cur = ListNode(0)
-                cur.next = head
-                while cur.next and cur.next.next:
-                    fir, sec = cur.next, cur.next.next
-                    cur.next, fir.next, sec.next = sec, sec.next, fir
-                    cur = cur.next.next
-                return dummy.next
+ 2. [两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs) 图解 [Python | Dummynode](https://leetcode.com/problems/swap-nodes-in-pairs/discuss/171788/Python-or-Dummynode)
 
-            def swapPairs1(self, head: ListNode) -> ListNode:
-                # 递归
-                if not head or not head.next:
-                    return head
-                new_start = head.next.next
-                head, head.next = head.next, head
-                head.next.next = self.swapPairs(new_start)
-                return head
-        ```
+     ```python
+     # Definition for singly-linked list.
+     # class ListNode:
+     #     def __init__(self, x):
+     #         self.val = x
+     #         self.next = None
 
-    3. [环形链表](https://leetcode-cn.com/problems/linked-list-cycle)
-    4. [环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii)
-    5. [K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)
+     class Solution:
+         def swapPairs(self, head: ListNode) -> ListNode:
+             # 迭代
+             dummy = cur = ListNode(0)
+             cur.next = head
+             while cur.next and cur.next.next:
+                 fir, sec = cur.next, cur.next.next
+                 cur.next, fir.next, sec.next = sec, sec.next, fir
+                 cur = cur.next.next
+             return dummy.next
+
+         def swapPairs1(self, head: ListNode) -> ListNode:
+             # 递归
+             if not head or not head.next:
+                 return head
+             new_start = head.next.next
+             head, head.next = head.next, head
+             head.next.next = self.swapPairs(new_start)
+             return head
+     ```
+
+ 3. [环形链表](https://leetcode-cn.com/problems/linked-list-cycle)
+ 4. [环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii)
+ 5. [K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)
 
 #### 常见问题解决办法
 
@@ -257,16 +261,65 @@
   - 取出操作：O(logN) - 按照元素的优先级取出。好处：取出操作不再是先入先出的，而是按照优先级
     - 底层具体实现的数据源结构较为多样和复杂：heap（堆）、bst、treap
       - heap 也是多种实现的，可能是所谓的二叉树实现的堆，也可能是 Fibonacci 堆或者其它形式的堆
-
+- 参考链接
+  - [Java 的 PriorityQueue 文档](http://docs.oracle.com/javase/10/docs/api/java/util/PriorityQueue.html)
+  - [Java 的 Stack 源码](http://developer.classpath.org/doc/java/util/Stack-source.html)
+  - [Java 的 Queue 源码](http://fuseyism.com/classpath/doc/java/util/Queue-source.html)
+  - [Python 的 heapq](http://docs.python.org/2/library/heapq.html)
+  - [高性能的 container 库](http://docs.python.org/2/library/collections.html)
 - 什么样题目可以用 Stack 来解决？
   - 具有最近相关性的事物，适合用 Stack 方法解决，如 [有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
 
 #### 实战题目解析
 
-- [有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
-- [最小栈](https://leetcode-cn.com/problems/min-stack/)
-- [柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram)
-- [滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum)
+1. [有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+
+    ```python
+    class Solution:
+        def isValid(self, s: str) -> bool:
+            stack = []
+            d = {')': '(', ']': '[', '}': '{'}
+            for char in s:
+                if char in d:
+                    if stack == [] or d[char] != stack.pop():
+                        return False
+                else:
+                    stack.append(char)
+            return not stack
+    ```
+
+2. [最小栈](https://leetcode-cn.com/problems/min-stack/)
+
+    ```python
+    class MinStack:
+
+        def __init__(self):
+            """
+            initialize your data structure here.
+            """
+            self.stack = []
+            self.min_stack = [math.inf]
+
+
+        def push(self, x: int) -> None:
+            self.stack.append(x)
+            self.min_stack.append(min(x, self.min_stack[-1]))
+
+        def pop(self) -> None:
+            self.stack.pop()
+            self.min_stack.pop()
+
+
+        def top(self) -> int:
+            return self.stack[-1]
+
+
+        def getMin(self) -> int:
+            return self.min_stack[-1]
+    ```
+
+3. [柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram)
+4. [滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum)
 
 ### 作业
 
@@ -462,11 +515,11 @@
 
 #### 中等
 
-1. [设计循环双端队列](https://leetcode.com/problems/design-circular-deque)
+1. [设计循环双端队列](https://leetcode-cn.com/problems/design-circular-deque)
 
 #### 困难
 
-1. [接雨水](https://leetcode.com/problems/trapping-rain-water/)
+1. [接雨水](https://leetcode-cn.com/problems/trapping-rain-water/)
 
 ### 下周预习
 
