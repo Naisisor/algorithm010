@@ -93,10 +93,17 @@
   - [树的遍历 Demo](https://visualgo.net/zh/bst)
   - [All DFS traversals (preorder, inorder, postorder) in Python in 1 line
 ](https://leetcode.com/problems/binary-tree-inorder-traversal/discuss/283746/All-DFS-traversals-(preorder-inorder-postorder)-in-Python-in-1-line)
+  - [Summary of preorder, inorder, postorder, four traversal ways for each](https://leetcode.com/problems/binary-tree-postorder-traversal/discuss/45740/Summary-of-preorder-inorder-postorder-four-traversal-ways-for-each)
 - 思考题
   - 树的面试题解法一般都是递归，为什么？
 
 #### 实战题目解析
+
+1. [二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+2. [二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)
+3. [N 叉树的后序遍历](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/)
+4. [N 叉树的前序遍历](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/description/)
+5. [N 叉树的层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)
 
 ### 第 6 课 | 堆和二叉堆、图
 
@@ -273,6 +280,40 @@
     ```
 
 3. [二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)
+
+    ```python
+    # Definition for a binary tree node.
+    # class TreeNode:
+    #     def __init__(self, x):
+    #         self.val = x
+    #         self.left = None
+    #         self.right = None
+
+    class Solution:
+        def preorderTraversal(self, root: TreeNode) -> List[int]:
+            # 递归
+            if not root:
+              return []
+            ans = []
+            ans.append(root.val)
+            ans.extend(self.preorderTraversal(root.left))
+            ans.extend(self.preorderTraversal(root.right))
+            return ans
+            # 或者，一行代码搞定
+            # return root and [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right) or []
+
+        def preorderTraversal1(self, root: TreeNode) -> List[int]:
+            # 迭代
+            ans, stack = [], root and [root]
+            while stack:
+                _root = stack.pop()
+                if _root:
+                    ans.append(_root.val)
+                    stack.append(_root.right)
+                    stack.append(_root.left)
+            return ans
+    ```
+
 4. [N 叉树的层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)
 5. [丑数](https://leetcode-cn.com/problems/chou-shu-lcof/)
 6. [前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)
