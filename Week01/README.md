@@ -48,24 +48,24 @@
 ### 五毒练习法
 
 1. 刷题第一遍
-    1. 5 分钟：读题 + 思考（最多不要超过 15 分钟）
-    2. 直接看解决：注意！多解法，比较解法优劣（如何 15 分钟后依旧没思路的情况下）
-    3. **背诵、默写好的解法**（这一步很重要）
+   1. 5 分钟：读题 + 思考（最多不要超过 15 分钟）
+   2. 直接看解决：注意！多解法，比较解法优劣（如何 15 分钟后依旧没思路的情况下）
+   3. **背诵、默写好的解法**（这一步很重要）
 2. 刷题第二遍
-    1. 将每种解法写一遍（闭卷），反复 Debug，直到代码在 [LeetCode](https://leetcode-cn.com/) 上执行通过
-    2. 对多种解法之间的优劣进行体会、优化
-    3. 总结及反思自己写的时候遇到的一些问题
+   1. 将每种解法写一遍（闭卷），反复 Debug，直到代码在 [LeetCode](https://leetcode-cn.com/) 上执行通过
+   2. 对多种解法之间的优劣进行体会、优化
+   3. 总结及反思自己写的时候遇到的一些问题
 3. 刷题第三遍
-    1. 时隔一天后，再重复做题
-    2. 对于不同解法的熟练程度进行专项练习
+   1. 时隔一天后，再重复做题
+   2. 对于不同解法的熟练程度进行专项练习
 4. 刷题第四遍：时隔一周后，反复回来练习相同的题目
 5. 刷题第五遍：面试前一周进行恢复性训练
 
 ### 刷题核心思想和误区
 
 - 思想
-    1. 重复刷题至少刷 5 遍
-    2. 优化方法：空间换时间、升维（二维）
+  1. 重复刷题至少刷 5 遍
+  2. 优化方法：空间换时间、升维（二维）
 - 误区：做题只做一遍
 
 ### [Know Thy Complexities!](https://www.bigocheatsheet.com/)
@@ -94,7 +94,7 @@
 - 链表（Linked List）
   - 查找（lookup），时间复杂度 O(n)
   - prepend（头/尾节点增加）、append、insert、delete 时间复杂度 O(1)
-- 跳表(Skip List)  
+- 跳表(Skip List)
   - 插入、删除、搜索时间复杂度 O(logn)
   - 跳表的实现原理是 升维思想 + 空间换时间
   - 跳表里面的元素必须是有序的，跳表对标的是平衡树也就是二叉搜索数中和二分查找
@@ -117,131 +117,131 @@
 4. [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 5. [三数之和](https://leetcode-cn.com/problems/3sum/)
 
-    ```python
-    class Solution:
-        def threeSum(self, nums: List[int]) -> List[List[int]]:
-            # 三重循环暴力解法， 时间复杂度 O(n³)
-            nums.sort()
-            res = []
-            for i in range(len(nums)):
-              for j in range(i + 1, len(nums)):
-                for k in range(j + 1, len(nums)):
-                  if nums[i] + nums[j] + nums[k] == 0:
-                    item = sorted([nums[i], nums[j], nums[k]])
-                    if item not in res:
-                        res.append(item)
-            return res
+   ```python
+   class Solution:
+       def threeSum(self, nums: List[int]) -> List[List[int]]:
+           # 三重循环暴力解法， 时间复杂度 O(n³)
+           nums.sort()
+           res = []
+           for i in range(len(nums)):
+             for j in range(i + 1, len(nums)):
+               for k in range(j + 1, len(nums)):
+                 if nums[i] + nums[j] + nums[k] == 0:
+                   item = sorted([nums[i], nums[j], nums[k]])
+                   if item not in res:
+                       res.append(item)
+           return res
 
-        def threeSum1(self, nums: List[int]) -> List[List[int]]:
-            # hash 解法，时间复杂度 O(n²)
-            nums.sort()
-            d = {-x: i for i, x in enumerate(nums)}
-            res = []
-            for i in range(len(nums)):
-              if nums[i] > 0: break
-              for j in range(i + 1, len(nums)):
-                if nums[i] + nums[j] in d:
-                  index = d[nums[i] + nums[j]]
-                  if index in (i, j):
-                    continue
-                  c = sorted([nums[i] , nums[j], nums[index]])
-                  if c not in res:
-                    res.append(c)
-            return res
+       def threeSum1(self, nums: List[int]) -> List[List[int]]:
+           # hash 解法，时间复杂度 O(n²)
+           nums.sort()
+           d = {-x: i for i, x in enumerate(nums)}
+           res = []
+           for i in range(len(nums)):
+             if nums[i] > 0: break
+             for j in range(i + 1, len(nums)):
+               if nums[i] + nums[j] in d:
+                 index = d[nums[i] + nums[j]]
+                 if index in (i, j):
+                   continue
+                 c = sorted([nums[i] , nums[j], nums[index]])
+                 if c not in res:
+                   res.append(c)
+           return res
 
-        def threeSum2(self, nums: List[int]) -> List[List[int]]:
-            # 排序、双指针，左右夹逼，时间复杂度 O(n²)
-            # 双指针方法通常先排序
-            nums.sort()
-            res = []
-            for k in range(len(nums) - 2):
-              if nums[k] > 0: break
-              if k > 0 and nums[k] == nums[k - 1]: continue
-              i, j = k + 1, len(nums) - 1
-              while i < j:
-                s = nums[i] + nums[j] + nums[k]
-                if s < 0:
-                  i += 1
-                elif s > 0:
-                  j -= 1
-                else:
-                  res.append([nums[k], nums[i], nums[j]])
-                  i += 1
-                  j -= 1
-                  while i < j and nums[i] == nums[i - 1]: i += 1
-                  while i < j and nums[j] == nums[j + 1]: j -= 1
-            return res
-    ```
+       def threeSum2(self, nums: List[int]) -> List[List[int]]:
+           # 排序、双指针，左右夹逼，时间复杂度 O(n²)
+           # 双指针方法通常先排序
+           nums.sort()
+           res = []
+           for k in range(len(nums) - 2):
+             if nums[k] > 0: break
+             if k > 0 and nums[k] == nums[k - 1]: continue
+             i, j = k + 1, len(nums) - 1
+             while i < j:
+               s = nums[i] + nums[j] + nums[k]
+               if s < 0:
+                 i += 1
+               elif s > 0:
+                 j -= 1
+               else:
+                 res.append([nums[k], nums[i], nums[j]])
+                 i += 1
+                 j -= 1
+                 while i < j and nums[i] == nums[i - 1]: i += 1
+                 while i < j and nums[j] == nums[j + 1]: j -= 1
+           return res
+   ```
 
 ##### Linked List 实战题目
 
- 1. [反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
+1.  [反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
 
-     ```python
-     # Definition for singly-linked list.
-     # class ListNode:
-     #     def __init__(self, x):
-     #         self.val = x
-     #         self.next = None
+    ```python
+    # Definition for singly-linked list.
+    # class ListNode:
+    #     def __init__(self, x):
+    #         self.val = x
+    #         self.next = None
 
-     class Solution:
-         def reverseList(self, head: ListNode) -> ListNode:
-             # 迭代
-             cur, prev = head, None
-             while cur:
-                 prev, cur.next, cur, = cur, prev, cur.next
-             return prev
+    class Solution:
+        def reverseList(self, head: ListNode) -> ListNode:
+            # 迭代
+            cur, prev = head, None
+            while cur:
+                prev, cur.next, cur, = cur, prev, cur.next
+            return prev
 
-         def reverseList1(self, head: ListNode) -> ListNode:
-             # 递归
-             if not (head and head.next):
-                 return head
-             new_head = self.reverseList(head.next)
-             head.next.next, head.next = head, None
-             return new_head
-     ```
+        def reverseList1(self, head: ListNode) -> ListNode:
+            # 递归
+            if not (head and head.next):
+                return head
+            new_head = self.reverseList(head.next)
+            head.next.next, head.next = head, None
+            return new_head
+    ```
 
- 2. [两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs) 图解 [Python | Dummynode](https://leetcode.com/problems/swap-nodes-in-pairs/discuss/171788/Python-or-Dummynode)
+2.  [两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs) 图解 [Python | Dummynode](https://leetcode.com/problems/swap-nodes-in-pairs/discuss/171788/Python-or-Dummynode)
 
-     ```python
-     # Definition for singly-linked list.
-     # class ListNode:
-     #     def __init__(self, x):
-     #         self.val = x
-     #         self.next = None
+    ```python
+    # Definition for singly-linked list.
+    # class ListNode:
+    #     def __init__(self, x):
+    #         self.val = x
+    #         self.next = None
 
-     class Solution:
-         def swapPairs(self, head: ListNode) -> ListNode:
-             # 迭代
-             dummy = cur = ListNode(0)
-             cur.next = head
-             while cur.next and cur.next.next:
-                 fir, sec = cur.next, cur.next.next
-                 cur.next, fir.next, sec.next = sec, sec.next, fir
-                 cur = cur.next.next
-             return dummy.next
+    class Solution:
+        def swapPairs(self, head: ListNode) -> ListNode:
+            # 迭代
+            dummy = cur = ListNode(0)
+            cur.next = head
+            while cur.next and cur.next.next:
+                fir, sec = cur.next, cur.next.next
+                cur.next, fir.next, sec.next = sec, sec.next, fir
+                cur = cur.next.next
+            return dummy.next
 
-         def swapPairs1(self, head: ListNode) -> ListNode:
-             # 递归
-             if not head or not head.next:
-                 return head
-             new_start = head.next.next
-             head, head.next = head.next, head
-             head.next.next = self.swapPairs(new_start)
-             return head
-     ```
+        def swapPairs1(self, head: ListNode) -> ListNode:
+            # 递归
+            if not head or not head.next:
+                return head
+            new_start = head.next.next
+            head, head.next = head.next, head
+            head.next.next = self.swapPairs(new_start)
+            return head
+    ```
 
- 3. [环形链表](https://leetcode-cn.com/problems/linked-list-cycle)
- 4. [环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii)
- 5. [K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)
+3.  [环形链表](https://leetcode-cn.com/problems/linked-list-cycle)
+4.  [环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii)
+5.  [K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)
 
 #### 常见问题解决办法
 
 > 解决各种问题的关键是找最近重复子问题
 
 1. 遇到问题不会解，懵逼的情况下怎么解决
-    1. 思考能不能暴力解决
-    2. 最基本的情况应该怎么解决
+   1. 思考能不能暴力解决
+   2. 最基本的情况应该怎么解决
 
 ### 第 4 课 | 栈、队列、优先队列、双端队列
 
@@ -274,31 +274,32 @@
 
 1. [有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
 
-    ```python
-    class Solution:
-        def isValid(self, s: str) -> bool:
-            stack = []
-            d = {')': '(', ']': '[', '}': '{'}
-            for char in s:
-                if char in d:
-                    if stack == [] or d[char] != stack.pop():
-                        return False
-                else:
-                    stack.append(char)
-            return not stack
-    ```
+   ```python
+   class Solution:
+       def isValid(self, s: str) -> bool:
+           stack = []
+           d = {')': '(', ']': '[', '}': '{'}
+           for char in s:
+               if char in d:
+                   if stack == [] or d[char] != stack.pop():
+                       return False
+               else:
+                   stack.append(char)
+           return not stack
+   ```
 
 2. [最小栈](https://leetcode-cn.com/problems/min-stack/)
 
-    ```python
-    class MinStack:
+   ```python
+   class MinStack:
 
-        def __init__(self):
-            """
-            initialize your data structure here.
-            """
-            self.stack = []
-            self.min_stack = [math.inf]
+       def __init__(self):
+           """
+           initialize your data structure here.
+           """
+           self.stack = []
+           self.min_stack = [math.inf]
+   ```
 
 
         def push(self, x: int) -> None:
@@ -327,191 +328,191 @@
 
 1. 用 add first 或 add last 这套新的 API 改写 Deque 的代码
 
-    ```python
-    # 待补充......
-    ```
+   ```python
+   # 待补充......
+   ```
 
 2. 分析 Queue 和 Priority Queue 的源码
 
-    ```python
-    # 待补充......
-    ```
+   ```python
+   # 待补充......
+   ```
 
 3. [删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 
-    ```python
-    class Solution:
-        def removeDuplicates(self, nums: List[int]) -> int:
-            # 时间复杂度 O(n)
-            i = 1
-            n = len(nums)
-            while i < n:
-                if nums[i] == [i - 1]:
-                    nums.pop(i)
-                    n += 1
-                else:
-                    i += 1
-            return nums
+   ```python
+   class Solution:
+       def removeDuplicates(self, nums: List[int]) -> int:
+           # 时间复杂度 O(n)
+           i = 1
+           n = len(nums)
+           while i < n:
+               if nums[i] == [i - 1]:
+                   nums.pop(i)
+                   n += 1
+               else:
+                   i += 1
+           return nums
 
-        def removeDuplicates1(self, nums: List[int]) -> int:
-          # 时间复杂度 O(n)
-            if len(nums) == 0:
-                return 0
-            i = 0
-            for n in mums:
-                if nums[i] == n:
-                    continue
-                i += 1
-                nums[i] = n
-            return nums
-    ```
+       def removeDuplicates1(self, nums: List[int]) -> int:
+         # 时间复杂度 O(n)
+           if len(nums) == 0:
+               return 0
+           i = 0
+           for n in mums:
+               if nums[i] == n:
+                   continue
+               i += 1
+               nums[i] = n
+           return nums
+   ```
 
 4. [旋转数组](https://leetcode-cn.com/problems/rotate-array/submissions/)
 
-    ```python
-    class Solution:
-        def rotate(self, nums: List[int], k: int) -> None:
-          """
-          Do not return anything, modify nums in-place instead.
-          """
-          k = k % len(nums)
-          while k != 0:
-              nums.insert(0, nums.pop())
-              k -= 1
-          return nums
+   ```python
+   class Solution:
+       def rotate(self, nums: List[int], k: int) -> None:
+         """
+         Do not return anything, modify nums in-place instead.
+         """
+         k = k % len(nums)
+         while k != 0:
+             nums.insert(0, nums.pop())
+             k -= 1
+         return nums
 
-        def rotate1(self, nums: List[int], k: int) -> None:
-          for _ in range(k):
-              nums.insert(0, nums.pop())
-          return nums
+       def rotate1(self, nums: List[int], k: int) -> None:
+         for _ in range(k):
+             nums.insert(0, nums.pop())
+         return nums
 
-        def rotate2(self, nums: List[int], k: int) -> None:
-          k = k % len(nums)
-          nums[:] = nums[-k:] + nums[:-k]
-          return nums
-    ```
+       def rotate2(self, nums: List[int], k: int) -> None:
+         k = k % len(nums)
+         nums[:] = nums[-k:] + nums[:-k]
+         return nums
+   ```
 
 5. [合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
 
-    ```python
-    # Definition for singly-linked list.
-    # class ListNode:
-    #     def __init__(self, val=0, next=None):
-    #         self.val = val
-    #         self.next = next
+   ```python
+   # Definition for singly-linked list.
+   # class ListNode:
+   #     def __init__(self, val=0, next=None):
+   #         self.val = val
+   #         self.next = next
 
-    class Solution:
-        def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-            # 迭代 iteratively
-            prev = prehead = ListNode(0)
-            while l1 and l2:
-                if l1.val < l2.val:
-                    prev.next, l1 = l1, l1.next
-                else:
-                    prev.next, l2 = l2, l2.next
-                prev = prev.next
-            prev.next = l1 if l1 else l2
-            return prehead.next
+   class Solution:
+       def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+           # 迭代 iteratively
+           prev = prehead = ListNode(0)
+           while l1 and l2:
+               if l1.val < l2.val:
+                   prev.next, l1 = l1, l1.next
+               else:
+                   prev.next, l2 = l2, l2.next
+               prev = prev.next
+           prev.next = l1 if l1 else l2
+           return prehead.next
 
-        def mergeTwoLists2(self, l1: ListNode, l2: ListNode) -> ListNode:
-            # 递归 recursively
-            if l1 is None: return l2
-            if l2 is None: return l1
-            if l1.val < l2.val:
-                l1.next = self.mergeTwoLists(l1.next, l2)
-                return l1
-            else:
-                l2.next =  self.mergeTwoLists(l2.next, l1)
-                return l2
-    ```
+       def mergeTwoLists2(self, l1: ListNode, l2: ListNode) -> ListNode:
+           # 递归 recursively
+           if l1 is None: return l2
+           if l2 is None: return l1
+           if l1.val < l2.val:
+               l1.next = self.mergeTwoLists(l1.next, l2)
+               return l1
+           else:
+               l2.next =  self.mergeTwoLists(l2.next, l1)
+               return l2
+   ```
 
 6. [合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/)
 
-    ```python
-    class Solution:
-        def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-          """
-          Do not return anything, modify nums1 in-place instead.
-          """
-          # 暴力解法
-          while len(nums1) > m:
-            nums1.pop()
-          while len(nums2) > n:
-            nums2.pop()
-          nums1.extend(nums2)
-          nums1.sort()
+   ```python
+   class Solution:
+       def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+         """
+         Do not return anything, modify nums1 in-place instead.
+         """
+         # 暴力解法
+         while len(nums1) > m:
+           nums1.pop()
+         while len(nums2) > n:
+           nums2.pop()
+         nums1.extend(nums2)
+         nums1.sort()
 
-        def merge1(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-          while m > 0 and n > 0:
-            if nums1[m - 1] > nums2[n - 1]:
-                nums1[m + n - 1] = nums1[m - 1]
-                m -= 1
-            else:
-                nums1[m + n - 1] = nums2[n - 1]
-                n -= 1
-          while n > 0:
-            nums1[m + n - 1] = nums2[n - 1]
-            n -= 1
+       def merge1(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+         while m > 0 and n > 0:
+           if nums1[m - 1] > nums2[n - 1]:
+               nums1[m + n - 1] = nums1[m - 1]
+               m -= 1
+           else:
+               nums1[m + n - 1] = nums2[n - 1]
+               n -= 1
+         while n > 0:
+           nums1[m + n - 1] = nums2[n - 1]
+           n -= 1
 
-        def merge2(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-          # 切片
-          nums1[m:] = nums2[:n]
-          nums1.sort()
-    ```
+       def merge2(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+         # 切片
+         nums1[m:] = nums2[:n]
+         nums1.sort()
+   ```
 
 7. [两数之和](https://leetcode-cn.com/problems/two-sum/)
 
-    ```python
-    class Solution:
-        def twoSum(self, nums: List[int], target: int) -> List[int]:
-          # 暴力解法，时间复杂度 O(n²)
-          for i, m in enumerate(nums):
-            for j, n in enumerate(nums[i + 1:], i + 1):
-              if m + n == target:
-                return [i, j]
-          return []
+   ```python
+   class Solution:
+       def twoSum(self, nums: List[int], target: int) -> List[int]:
+         # 暴力解法，时间复杂度 O(n²)
+         for i, m in enumerate(nums):
+           for j, n in enumerate(nums[i + 1:], i + 1):
+             if m + n == target:
+               return [i, j]
+         return []
 
-        def twoSum2(self, nums: List[int], target: int) -> List[int]:
-          # hash，时间复杂度 O(n)
-          d = {}
-          for i, n in enumerate(nums):
-            if taget - n in d:
-              return [d[taget - n], i]
-          return []
-    ```
+       def twoSum2(self, nums: List[int], target: int) -> List[int]:
+         # hash，时间复杂度 O(n)
+         d = {}
+         for i, n in enumerate(nums):
+           if taget - n in d:
+             return [d[taget - n], i]
+         return []
+   ```
 
 8. [移动零](https://leetcode-cn.com/problems/move-zeroes/)
 
-    ```python
-    class Solution:
-        def moveZeroes(self, nums: List[int]) -> None:
-            """
-            Do not return anything, modify nums in-place instead.
-            """
-            cur = 0
-            for i, n in enumerate(nums):
-              if n == 0: continue
-              nums[cur], nums[i] = n, nums[cur]
-              cur += 1
-    ```
+   ```python
+   class Solution:
+       def moveZeroes(self, nums: List[int]) -> None:
+           """
+           Do not return anything, modify nums in-place instead.
+           """
+           cur = 0
+           for i, n in enumerate(nums):
+             if n == 0: continue
+             nums[cur], nums[i] = n, nums[cur]
+             cur += 1
+   ```
 
 9. [加一](https://leetcode-cn.com/problems/plus-one/)
 
-    ```python
-    class Solution:
-        def plusOne(self, digits: List[int]) -> List[int]:
-          num =  functools.reduce(lambda x, y: x * 10 + y, digits) + 1
-          return [int(n) for n in str(num)]  # or return list(map(int, str(num)))
+   ```python
+   class Solution:
+       def plusOne(self, digits: List[int]) -> List[int]:
+         num =  functools.reduce(lambda x, y: x * 10 + y, digits) + 1
+         return [int(n) for n in str(num)]  # or return list(map(int, str(num)))
 
-        def plusOne1(self, digits: List[int]) -> List[int]:
-          if digits == []: return [1]
-          last = digits.pop()
-          if last == 9:
-            digits = self.plusOne(digits) + [0]
-          else:
-            digits.append(last + 1)
-          return digits
-    ```
+       def plusOne1(self, digits: List[int]) -> List[int]:
+         if digits == []: return [1]
+         last = digits.pop()
+         if last == 9:
+           digits = self.plusOne(digits) + [0]
+         else:
+           digits.append(last + 1)
+         return digits
+   ```
 
 #### 中等
 
