@@ -114,64 +114,87 @@
 1. [两数之和](https://leetcode-cn.com/problems/two-sum/)
 2. [移动零](https://leetcode-cn.com/problems/move-zeroes/)
 3. [盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/) 使用 「左右夹逼」双指针的方法解决
+
+   ```Python
+    class Solution:
+        def maxArea(self, height: List[int]) -> int:
+          # 暴力解法，时间复杂度 O(n²)
+          ans = 0
+          for i, m in enumerate(height):
+              for j, n in enumerate(height[i + 1:], i + 1):
+                  ans = max(ans, min(m, n) * (j - i))
+          return ans
+
+        def maxArea1(self, height: List[int]) -> int:
+          # 双指针，左右夹逼，时间复杂度 O(n)
+            ans, left, right = 0, 0, len(height) - 1
+            while left < right:
+                ans = max(ans, min(height[left], height[right]) * (right - left))
+                if height[left] < height[right]:
+                    left += 1
+                else:
+                    right -= 1
+            return ans
+   ```
+
 4. [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 5. [三数之和](https://leetcode-cn.com/problems/3sum/)
 
-   ```python
-   class Solution:
-       def threeSum(self, nums: List[int]) -> List[List[int]]:
-           # 三重循环暴力解法， 时间复杂度 O(n³)
-           nums.sort()
-           res = []
-           for i in range(len(nums)):
-             for j in range(i + 1, len(nums)):
-               for k in range(j + 1, len(nums)):
-                 if nums[i] + nums[j] + nums[k] == 0:
-                   item = sorted([nums[i], nums[j], nums[k]])
-                   if item not in res:
-                       res.append(item)
-           return res
+```python
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        # 三重循环暴力解法， 时间复杂度 O(n³)
+        nums.sort()
+        res = []
+        for i in range(len(nums)):
+          for j in range(i + 1, len(nums)):
+            for k in range(j + 1, len(nums)):
+              if nums[i] + nums[j] + nums[k] == 0:
+                item = sorted([nums[i], nums[j], nums[k]])
+                if item not in res:
+                    res.append(item)
+        return res
 
-       def threeSum1(self, nums: List[int]) -> List[List[int]]:
-           # hash 解法，时间复杂度 O(n²)
-           nums.sort()
-           d = {-x: i for i, x in enumerate(nums)}
-           res = []
-           for i in range(len(nums)):
-             if nums[i] > 0: break
-             for j in range(i + 1, len(nums)):
-               if nums[i] + nums[j] in d:
-                 index = d[nums[i] + nums[j]]
-                 if index in (i, j):
-                   continue
-                 c = sorted([nums[i] , nums[j], nums[index]])
-                 if c not in res:
-                   res.append(c)
-           return res
+    def threeSum1(self, nums: List[int]) -> List[List[int]]:
+        # hash 解法，时间复杂度 O(n²)
+        nums.sort()
+        d = {-x: i for i, x in enumerate(nums)}
+        res = []
+        for i in range(len(nums)):
+          if nums[i] > 0: break
+          for j in range(i + 1, len(nums)):
+            if nums[i] + nums[j] in d:
+              index = d[nums[i] + nums[j]]
+              if index in (i, j):
+                continue
+              c = sorted([nums[i] , nums[j], nums[index]])
+              if c not in res:
+                res.append(c)
+        return res
 
-       def threeSum2(self, nums: List[int]) -> List[List[int]]:
-           # 排序、双指针，左右夹逼，时间复杂度 O(n²)
-           # 双指针方法通常先排序
-           nums.sort()
-           res = []
-           for k in range(len(nums) - 2):
-             if nums[k] > 0: break
-             if k > 0 and nums[k] == nums[k - 1]: continue
-             i, j = k + 1, len(nums) - 1
-             while i < j:
-               s = nums[i] + nums[j] + nums[k]
-               if s < 0:
-                 i += 1
-               elif s > 0:
-                 j -= 1
-               else:
-                 res.append([nums[k], nums[i], nums[j]])
-                 i += 1
-                 j -= 1
-                 while i < j and nums[i] == nums[i - 1]: i += 1
-                 while i < j and nums[j] == nums[j + 1]: j -= 1
-           return res
-   ```
+    def threeSum2(self, nums: List[int]) -> List[List[int]]:
+        # 排序、双指针，左右夹逼，时间复杂度 O(n²)
+        # 双指针方法通常先排序
+        nums.sort()
+        res = []
+        for k in range(len(nums) - 2):
+          if nums[k] > 0: break
+          if k > 0 and nums[k] == nums[k - 1]: continue
+          i, j = k + 1, len(nums) - 1
+          while i < j:
+            s = nums[i] + nums[j] + nums[k]
+            if s < 0:
+              i += 1
+            elif s > 0:
+              j -= 1
+            else:
+              res.append([nums[k], nums[i], nums[j]])
+              i += 1
+              j -= 1
+              while i < j and nums[i] == nums[i - 1]: i += 1
+              while i < j and nums[j] == nums[j + 1]: j -= 1
+        return res
+```
 
 ##### Linked List 实战题目
 
