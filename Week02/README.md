@@ -93,8 +93,7 @@
        **二叉搜索树的特点就是大部分的操作的时间复杂度都是 O(logn)**
 - 其它
   - [树的遍历 Demo](https://visualgo.net/zh/bst)
-  - [All DFS traversals (preorder, inorder, postorder) in Python in 1 line
-    ](<https://leetcode.com/problems/binary-tree-inorder-traversal/discuss/283746/All-DFS-traversals-(preorder-inorder-postorder)-in-Python-in-1-line>)
+  - [All DFS traversals (preorder, inorder, postorder) in Python in 1 line](<https://leetcode.com/problems/binary-tree-inorder-traversal/discuss/283746/All-DFS-traversals-(preorder-inorder-postorder)-in-Python-in-1-line>)
   - [Summary of preorder, inorder, postorder, four traversal ways for each](https://leetcode.com/problems/binary-tree-postorder-traversal/discuss/45740/Summary-of-preorder-inorder-postorder-four-traversal-ways-for-each)
 - 思考题
   - 树的面试题解法一般都是递归，为什么？

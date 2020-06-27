@@ -24,7 +24,7 @@
 
   - 递归 - 循环
   - 通过函数体来进行的循环
-  - 递归代码模板
+  - [递归代码模板](https://shimo.im/docs/EICAr9lRPUIPHxsH/)
 
     ```Python
     # Python
@@ -83,6 +83,29 @@
 
 #### 分治、回溯的实现和特性
 
+- [分治代码模板](https://shimo.im/docs/zvlDqLLMFvcAF79A/read)
+
+  ```Python
+  # Python
+  def divide_conquer(problem, param1, param2, ...):
+      # recursion terminator
+      if problem is None:
+        print_result
+        return
+      # prepare data
+      data = prepare_data(problem)
+      subproblems = split_problem(problem, data)
+      # conquer subproblems
+      subresult1 = self.divide_conquer(subproblems[0], p1, ...)
+      subresult2 = self.divide_conquer(subproblems[1], p1, ...)
+      subresult3 = self.divide_conquer(subproblems[2], p1, ...)
+      …
+      # process and generate the final result
+      result = process_result(subresult1, subresult2, subresult3, …)
+
+      # revert the current level states
+  ```
+
 #### 实战题目解析
 
 1. [Pow(x, n) ](https://leetcode-cn.com/problems/powx-n/)
@@ -95,8 +118,40 @@
 
 #### 中等
 
-1. [二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
-2. [从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+1. [二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/) [题解](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/)
+
+   ```Python
+    class Solution:
+        def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+              if not root or root == p or root == q: return root
+              left = self.lowestCommonAncestor(root.left, p, q)
+              right = self.lowestCommonAncestor(root.right, p, q)
+              if not left and not right: return
+              if not left: return right
+              if not right: return left
+              return root
+   ```
+
+2. [从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) [题解](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/discuss/34579/Python-short-recursive-solution.)
+
+   ```Python
+   # Definition for a binary tree node.
+   # class TreeNode:
+   #     def __init__(self, x):
+   #         self.val = x
+   #         self.left = None
+   #         self.right = None
+
+      class Solution:
+          def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+              if inorder:
+                  root_index = inorder.index(preorder.pop(0))
+                  root = TreeNode(inorder[root_index])
+                  root.left = self.buildTree(preorder, inorder[:root_index])
+                  root.right = self.buildTree(preorder, inorder[root_index + 1:])
+                  return root
+   ```
+
 3. [组合](https://leetcode-cn.com/problems/combinations/)
 4. [全排列](https://leetcode-cn.com/problems/permutations/)
 5. [全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
