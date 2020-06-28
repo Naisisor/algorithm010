@@ -118,7 +118,7 @@
 
 #### 中等
 
-1. [二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/) [题解](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/)
+1. [二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/) - [题解](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/)
 
    ```Python
     class Solution:
@@ -132,7 +132,7 @@
               return root
    ```
 
-2. [从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) [题解](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/discuss/34579/Python-short-recursive-solution.)
+2. [从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) - [题解](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/discuss/34579/Python-short-recursive-solution.)
 
    ```Python
    # Definition for a binary tree node.
@@ -153,7 +153,7 @@
    ```
 
 3. [组合](https://leetcode-cn.com/problems/combinations/)
-4. [全排列](https://leetcode-cn.com/problems/permutations/)
+4. [全排列](https://leetcode-cn.com/problems/permutations/) - [题解](https://leetcode.com/problems/permutations/discuss/18241/One-Liners-in-Python)
 5. [全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
 
 ### 下周预习
