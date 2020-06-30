@@ -322,8 +322,6 @@ class Solution:
            """
            self.stack = []
            self.min_stack = [math.inf]
-   ```
-
 
         def push(self, x: int) -> None:
             self.stack.append(x)
@@ -333,14 +331,12 @@ class Solution:
             self.stack.pop()
             self.min_stack.pop()
 
-
         def top(self) -> int:
             return self.stack[-1]
 
-
         def getMin(self) -> int:
             return self.min_stack[-1]
-    ```
+   ```
 
 3. [柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram)
 4. [滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum)
