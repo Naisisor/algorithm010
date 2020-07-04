@@ -38,7 +38,7 @@
         process(level, data, *args)
 
         # drill down
-        self.recursion(level + 1, p1, *args)
+        recursion(level + 1, p1, *args)
 
         # reverse the current level status if needed
     ```
