@@ -164,7 +164,45 @@
 2. [岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
 3. [扫雷游戏](https://leetcode-cn.com/problems/minesweeper/description/)
 4. [跳跃游戏](https://leetcode-cn.com/problems/jump-game/)
+
+   ```Python
+   class Solution:
+       def canJump(self, nums: List[int]) -> bool:
+           if not nums:
+             return False
+           end_reachble = len(nums) - 1
+           for i in range(len(nums) - 1, -1, -1):
+             if nums[i] + i >= end_reachble:
+                 end_reachble = i
+           return end_reachble == 0
+   ```
+
 5. [搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
+
+   ```Python
+   class Solution:
+       def search(self, nums: List[int], target: int) -> int:
+           # 暴力求解，时间复杂度 O(n)
+           for i, n in enumerate(nums):
+               if n == target:
+                 return i
+           else:
+               return -1
+
+       def search1(self, nums: List[int], target: int) -> int:
+           # 二分法查找，时间复杂度 O(logn)
+           if len(nums) == 0: return -1
+           left, right = 0, len(nums) - 1
+           while left <= right:
+               mid = (left + right) // 2
+               if nums[mid] == target: return mid
+               if nums[0] <= target < nums[mid] or target < nums[mid] < nums[0] or nums[mid] < nums[0] <= target:
+                   right = mid - 1
+               else:
+                   left = mid + 1
+           return -1
+   ```
+
 6. [搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/)
 7. [寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)
 
