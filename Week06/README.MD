@@ -40,10 +40,42 @@
 #### 中等
 
 1. [最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
+
+   ```Python
+   class Solution:
+       def minPathSum(self, grid: [[int]]) -> int:
+           for i in range(len(grid)):
+               for j in range(len(grid[0])):
+                   if i == j == 0:
+                       continue
+                   elif i == 0:
+                       grid[i][j] = grid[i][j - 1] + grid[i][j]
+                   elif j == 0:
+                       grid[i][j] = grid[i - 1][j] + grid[i][j]
+                   else:
+                       grid[i][j] = min(grid[i - 1][j], grid[i][j - 1]) + grid[i][j]
+           return grid[-1][-1]
+   ```
+
 2. [解码方法](https://leetcode-cn.com/problems/decode-ways)
 3. [最大正方形](https://leetcode-cn.com/problems/maximal-square/)
 4. [任务调度器](https://leetcode-cn.com/problems/task-scheduler/)
 5. [回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)
+
+   ```Python
+   class Solution(object):
+       def countSubstrings(self, S):
+           N = len(S)
+           ans = 0
+           for center in xrange(2 * N - 1):
+               left = center / 2
+               right = left + center % 2
+               while left >= 0 and right < N and S[left] == S[right]:
+                   ans += 1
+                   left -= 1
+                   right += 1
+           return ans
+   ```
 
 #### 困难
 
