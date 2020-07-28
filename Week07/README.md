@@ -79,6 +79,18 @@ Trie 树的核心思想是空间换时间
 
 - [爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 
+  ```Python
+  class Solution:
+      def climbStairs(self, n: int) -> int:
+          if n <= 2:
+              return n
+          f1, f2, f3 = 1, 2, 0
+          for n in range(2, n):
+              f3 = f1 + f2
+              f1, f2 = f2, f1 + f2
+          return f3
+  ```
+
 #### 中等
 
 1. [实现 Trie (前缀树) ](https://leetcode-cn.com/problems/implement-trie-prefix-tree/#/description)
@@ -87,6 +99,23 @@ Trie 树的核心思想是空间换时间
 4. [被围绕的区域](https://leetcode-cn.com/problems/surrounded-regions/)
 5. [有效的数独](https://leetcode-cn.com/problems/valid-sudoku/description/)
 6. [括号生成](https://leetcode-cn.com/problems/generate-parentheses/)
+
+   ```Python
+   class Solution:
+       def generateParenthesis(self, n: int) -> List[str]:
+           ans = []
+           def _generate(left, right, s):
+               if left == n and right == n:
+                   ans.append(s)
+                   return
+               if left < n:
+                   _generate(left + 1, right, s + '(')
+               if right < left:
+                   _generate(left, right + 1, s + ')')
+           _generate(0, 0, '')
+           return ans
+   ```
+
 7. [单词接龙](https://leetcode-cn.com/problems/word-ladder/)
 8. [最小基因变化](https://leetcode-cn.com/problems/minimum-genetic-mutation/)
 
