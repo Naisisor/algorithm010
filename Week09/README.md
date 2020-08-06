@@ -90,6 +90,26 @@ KMP 算法(Knuth-Morris-Pratt)的思想就是，当子串与目标字符串不�
    ```
 
 2. [反转字符串 II ](https://leetcode-cn.com/problems/reverse-string-ii/)
+
+```Python
+class Solution:
+    def reverseStr(self, s: str, k: int) -> str:
+        if len(s) <= k:
+            return s[::-1]
+        l, r = 0, len(s)
+        ans = ''
+        while l <= r:
+            ans += s[l:l + k][::-1] + s[l + k:l + 2 * k]
+            l += 2 * k
+        return ans
+
+    def reverseStr1(self, s: str, k: int) -> str:
+        s = list(s)
+        for i in range(0, len(s), 2 * k):
+            s[i:i + k] = reversed(s[i:i + k])
+        return ''.join(s)
+```
+
 3. [翻转字符串里的单词](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
 4. [反转字符串中的单词 III ](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/)
 5. [仅仅反转字母](https://leetcode-cn.com/problems/reverse-only-letters/)
