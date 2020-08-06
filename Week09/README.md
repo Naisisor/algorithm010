@@ -111,6 +111,18 @@ KMP 算法(Knuth-Morris-Pratt)的思想就是，当子串与目标字符串不�
 6. [同构字符串](https://leetcode-cn.com/problems/isomorphic-strings/)
 7. [验证回文字符串 Ⅱ](https://leetcode-cn.com/problems/valid-palindrome-ii/)
 
+   ```Python
+   class Solution:
+       def validPalindrome(self, s: str) -> bool:
+           l, r = 0, len(s) - 1
+           while l <= r:
+               if s[l] != s[r]:
+                   return s[l + 1:r + 1] == s[l + 1:r + 1][::-1] or s[l:r] == s[l:r][::-1]
+               l += 1
+               r -= 1
+           return True
+   ```
+
 #### 中等
 
 1. 在学习总结中，写出不同路径 2 这道题目的状态转移方程。
