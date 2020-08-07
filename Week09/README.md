@@ -84,7 +84,8 @@ KMP 算法(Knuth-Morris-Pratt)的思想就是，当子串与目标字符串不�
        def firstUniqChar3(self, s: str) -> int:
            d = collections.Counter(s)
            for k, v in d.items():
-               if v != 1: continue
+               if v != 1:
+                    continue
                return s.index(k)
            return -1
    ```
@@ -111,7 +112,27 @@ KMP 算法(Knuth-Morris-Pratt)的思想就是，当子串与目标字符串不�
    ```
 
 3. [翻转字符串里的单词](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
+
+   ```Python
+   class Solution:
+       def reverseWords(self, s: str) -> str:
+           return ' '.join(s.split()[::-1])
+   ```
+
 4. [反转字符串中的单词 III ](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/)
+
+   ```Python
+   class Solution:
+       def reverseWords(self, s: str) -> str:
+           return ' '.join(map(lambda word: word[::-1], s.split(' ')))
+
+       def reverseWords1(self, s: str) -> str:
+           return ' '.join((word[::-1] for word in s.split(' ')))
+
+       def reverseWords2(self, s: str) -> str:
+           return ' '.join(s.split(' ')[::-1])[::-1]
+   ```
+
 5. [仅仅反转字母](https://leetcode-cn.com/problems/reverse-only-letters/)
 
    ```Python
@@ -129,6 +150,31 @@ KMP 算法(Knuth-Morris-Pratt)的思想就是，当子串与目标字符串不�
    ```
 
 6. [同构字符串](https://leetcode-cn.com/problems/isomorphic-strings/)
+
+   ```Python
+   class Solution:
+       def isIsomorphic(self, s: str, t: str) -> bool:
+           s_d = collections.defaultdict(list)
+           for i, c in enumerate(s):
+               s_d[c].append(i)
+           t_d = collections.defaultdict(list)
+           for i, c in enumerate(t):
+               t_d[c].append(i)
+           return list(s_d.values()) == list(t_d.values())
+
+       def isIsomorphic1(self, s: str, t: str) -> bool:
+           d = {}
+           for i, c in enumerate(s):
+               if c not in d:
+                   if t[i] in d.values():
+                       return False
+                   d[c] = t[i]
+               else:
+                   if d[c] != t[i]:
+                       return False
+           return True
+   ```
+
 7. [验证回文字符串 Ⅱ](https://leetcode-cn.com/problems/valid-palindrome-ii/)
 
    ```Python
